@@ -1,9 +1,9 @@
-// @todo: Темплейт карточки
+addEventListener("DOMContentLoaded", (event) => {
+ const cardsDOMContainer = document.querySelector('.places__list');
+ const templateRoot = document.querySelector('#card-template');
+ const templateCardNode = templateRoot.content.querySelector('.card');
 
-// @todo: DOM узлы
+ const cardNodes = generateCardList(CARDS_DATA, templateCardNode);
 
-// @todo: Функция создания карточки
-
-// @todo: Функция удаления карточки
-
-// @todo: Вывести карточки на страницу
+ cardsDOMContainer.append(...cardNodes);
+});

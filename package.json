@@ -1,0 +1,25 @@
+{
+  "name": "mesto-project-ff",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/lizibrizi/mesto-project-ff#readme",
+  "bugs": {
+    "url": "https://github.com/lizibrizi/mesto-project-ff/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lizibrizi/mesto-project-ff.git"
+  },
+  "license": "ISC",
+  "author": "kiseleva elizaveta",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "live-server": "^1.2.2",
+    "start": "^5.1.0"
+  }
+}
