@@ -5,10 +5,17 @@ const generateCardNode = (cardData, clonedTemplate) => {
 
     clonedTemplate.querySelector('.card__title').textContent = cardData.name;
 
-    clonedTemplate.querySelector('.card__delete-button')
-        .addEventListener('click', () => clonedTemplate.remove());
+   const deleteButton = clonedTemplate.querySelector('.card__delete-button');
+   deleteButton.addEventListener('click', handleDeleteCard);
 
     return clonedTemplate;
+}
+
+function handleDeleteCard (event) {
+    const cardElement = event.target.closest ('.card');
+    if (cardElement) {
+        cardElement.remove();
+    }
 }
 
 const generateCardList = (data, template) =>
