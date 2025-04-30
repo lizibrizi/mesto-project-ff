@@ -6,7 +6,7 @@ const generateCardNode = (cardData, clonedTemplate) => {
     clonedTemplate.querySelector('.card__title').textContent = cardData.name;
 
     clonedTemplate.querySelector('.card__delete-button')
-        .addEventListener('click', event => event.target.remove());
+        .addEventListener('click', () => clonedTemplate.remove());
 
     return clonedTemplate;
 }
