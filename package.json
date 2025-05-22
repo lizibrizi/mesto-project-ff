@@ -1,7 +1,8 @@
 {
   "name": "mesto-project-ff",
   "version": "1.0.0",
-  "description": "",
+  "description": "https://github.com/lizibrizi/mesto-project-ff.git",
+  "keywords": [],
   "homepage": "https://github.com/lizibrizi/mesto-project-ff#readme",
   "bugs": {
     "url": "https://github.com/lizibrizi/mesto-project-ff/issues"
@@ -16,10 +17,28 @@
   "main": "index.js",
   "scripts": {
     "start": "live-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
   },
   "dependencies": {
+    "corejs": "^1.0.0",
     "live-server": "^1.2.2",
     "start": "^5.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "autoprefixer": "^10.4.21",
+    "babel-loader": "^10.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "core-js": "^2.6.12",
+    "css-loader": "^7.1.2",
+    "cssnano": "^7.0.7",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "postcss-loader": "^8.1.1",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
   }
 }

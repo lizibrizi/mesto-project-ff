@@ -1,4 +1,4 @@
-const CARDS_DATA = [
+ export const CARDS_DATA = [
     {
         name: "Архыз",
         link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -24,3 +24,4 @@ const CARDS_DATA = [
         link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
     }
 ];
+
