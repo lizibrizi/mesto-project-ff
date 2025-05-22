@@ -1,4 +1,5 @@
-export const generateCardNode = (cardData, clonedTemplate, handleDeleteCard, handleLikeButtonClick, handleCardImageClick ) => {
+export const generateCardNode = (cardData, template, handleDeleteCard, handleLikeButtonClick, handleCardImageClick ) => {
+    const clonedTemplate = template.cloneNode(true);
     const cardImage = clonedTemplate.querySelector('.card__image');
     cardImage.src = cardData.link;
     cardImage.alt = cardData.name;
@@ -17,4 +18,17 @@ export const generateCardNode = (cardData, clonedTemplate, handleDeleteCard, han
 };
 
 export const generateCardList = (data, template, handleDeleteCard, handleLikeButtonClick, handleCardImageClick) =>
-    data.map(cardData => generateCardNode(cardData, template.cloneNode(true), handleDeleteCard, handleLikeButtonClick, handleCardImageClick));
+    data.map(cardData => generateCardNode(cardData, template, handleDeleteCard, handleLikeButtonClick, handleCardImageClick));
+
+// Обработчик лайка
+export function handleLikeButtonClick(evt) {
+  evt.target.classList.toggle('card__like-button_is-active');
+}
+
+// Обработчик удаления
+export function handleDeleteCard(evt) {
+  const cardElement = evt.target.closest('.card');
+  if (cardElement) {
+    cardElement.remove();
+  }
+}

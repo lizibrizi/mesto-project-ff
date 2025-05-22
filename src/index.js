@@ -1,3 +1,5 @@
+ document.addEventListener('DOMContentLoaded', () => {
+    
  const cardsDOMContainer = document.querySelector('.places__list');
  const templateRoot = document.querySelector('#card-template');
  const templateCardNode = templateRoot.content.querySelector('.card');
@@ -9,33 +11,22 @@
  handleCardImageClick
  );
  cardsDOMContainer.append(...cardNodes);
-
+ });
+ 
 import {CARDS_DATA} from './scripts/data.js';
 import './pages/index.css';
-import { generateCardNode, generateCardList } from './scripts/cards.js';
+import { generateCardNode, generateCardList } from './scripts/card.js';
 import { openPopup, closePopup } from  './scripts/modal.js';
-
-// Обработчик лайка
-function handleLikeButtonClick(evt) {
-  evt.target.classList.toggle('card__like-button_is-active');
-}
-
-// Обработчик удаления
-function handleDeleteCard(evt) {
-  const cardElement = evt.target.closest('.card');
-  if (cardElement) {
-    cardElement.remove();
-  }
-}
+import { handleDeleteCard, handleLikeButtonClick } from './scripts/card.js';
 
 // Элементы для редактирования профиля
 const editPopup = document.querySelector(".popup_type_edit");
 const editButton = document.querySelector(".profile__edit-button");
-const formElement = document.querySelector('form[name="edit-profile"]');
+const formEditProfile = document.querySelector('form[name="edit-profile"]');
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const nameInput = formElement.querySelector('input[name="name"]');
-const descriptionInput = formElement.querySelector('input[name="description"]');
+const nameInput = formEditProfile.querySelector('input[name="name"]');
+const descriptionInput = formEditProfile.querySelector('input[name="description"]');
 
  // Элементы для добавления карточки
  const addButton = document.querySelector(".profile__add-button");
@@ -89,7 +80,7 @@ function handleAddCardSubmit(evt) {
 }
 
 // Отправка формы редактирования профиля
-formElement.addEventListener("submit", handleProfileFormSubmit);
+formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 // Отправка формы добавления карточки
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
