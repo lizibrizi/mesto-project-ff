@@ -9,7 +9,6 @@ export const closePopup = (popup) => {
     document.removeEventListener('keydown', handleEscClose);
 }
 
-
 // Функция-обработчик для Esc
 function handleEscClose(evt) {
   if (evt.key === 'Escape') {
