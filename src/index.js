@@ -1,4 +1,4 @@
- import './pages/index.css';
+  import './pages/index.css';
 
 import { generateCardNode, generateCardList } from './scripts/card.js';
 import { openPopup, closePopup } from './scripts/modal.js';
@@ -7,6 +7,8 @@ import {  addCard,
   getInitialCards,
   getUserInfo,
   removeCard,
+  likeCard,
+  unlikeCard,
   updateUserAvatar,
   updateUserProfile,} from './scripts/api.js';
 
@@ -113,6 +115,32 @@ function handleProfileFormSubmit(evt) {
       renderLoading(false, submitButton, originalButtonText);
   });
 }
+ 
+//функция-обработчик лайка
+function handleLikeButtonClick(cardData, likeButton, likeCounter) { 
+   const isLiked = likeButton.classList.contains('card__like-button_is-active');
+   const method = isLiked ? unlikeCard : likeCard;
+
+    method(cardData._id)
+      .then((updatedCard) => {
+        likeButton.classList.toggle('card__like-button_is-active', !isLiked);
+        likeCounter.textContent = updatedCard.likes.length;
+      })
+      .catch((err) => {
+        console.error('Ошибка при обновлении лайка:', err);
+      });
+  };
+
+//функция-обработчик удаления
+function handleDeleteCard(cardId, cardElement) {
+      removeCard(cardId)
+        .then(() => {
+          cardElement.remove();
+        })
+        .catch((err) => {
+          console.error('Ошибка при удалении карточки:', err);
+         });
+        }
 
 // Обработка формы добавления новой карточки
 function handleAddCardSubmit(evt) {
@@ -129,6 +157,8 @@ function handleAddCardSubmit(evt) {
       const cardElement = generateCardNode(
         newCard,
         templateCardNode,
+        handleDeleteCard,
+        handleLikeButtonClick,
         handleCardImageClick,
         currentUserId
       );
@@ -207,6 +237,8 @@ addButton.addEventListener("click", () => {
     const cardElements = generateCardList(
       cards.reverse(),
       templateCardNode,
+      handleDeleteCard,
+      handleLikeButtonClick,
       handleCardImageClick,
       currentUserId
     );
@@ -219,5 +251,3 @@ addButton.addEventListener("click", () => {
 // Обработчики отправки форм
 formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
-
-

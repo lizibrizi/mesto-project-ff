@@ -3,6 +3,8 @@ import { likeCard, unlikeCard, removeCard } from './api.js';
 export const generateCardNode = (
   cardData,
   template,
+  handleDeleteCard,
+  handleLikeButtonClick,
   handleCardImageClick,
   currentUserId
 ) => {
@@ -18,48 +20,31 @@ export const generateCardNode = (
   cardTitle.textContent = cardData.name;
   likeCounter.textContent = cardData.likes.length;
 
-  // Отображение лайка текущего пользователя
- if (cardData.likes.some(user => user._id === currentUserId)) {
-    likeButton.classList.add('card__like-button_is-active');
+
+  // Установка количества лайков
+  likeCounter.textContent = cardData.likes.length;
+
+  // Отмечаем лайк активным, если текущий пользователь уже лайкал
+  if (cardData.likes.some(user => user._id === currentUserId)) {
+    likeButton.classList.add('card__like-button_active');
   }
 
-  // Обработка клика по изображению
-  cardImage.addEventListener('click', () =>
-    handleCardImageClick({
-      link: cardData.link,
-      name: cardData.name,
-    })
+  // Удаляем кнопку удаления, если карточка чужая
+  if (cardData.owner._id !== currentUserId) {
+    deleteButton.remove();
+  } else {
+    deleteButton.addEventListener('click', () =>
+      handleDeleteCard(cardData._id, clonedTemplate)
+    );
+  }
+// Обработчики
+  likeButton.addEventListener('click', () =>
+    handleLikeButtonClick(cardData, likeButton, likeCounter)
   );
 
-  // Обработка лайков
-  likeButton.addEventListener('click', () => {
-    const isLiked = likeButton.classList.contains('card__like-button_is-active');
-    const method = isLiked ? unlikeCard : likeCard;
-
-    method(cardData._id)
-      .then((updatedCard) => {
-        likeButton.classList.toggle('card__like-button_is-active', !isLiked);
-        likeCounter.textContent = updatedCard.likes.length;
-      })
-      .catch((err) => {
-        console.error('Ошибка при обновлении лайка:', err);
-      });
-  });
-
-  // Показываем кнопку удаления только для своих карточек
-  if (cardData.owner._id === currentUserId) {
-    deleteButton.addEventListener('click', () => {
-      removeCard(cardData._id)
-        .then(() => {
-          clonedTemplate.remove();
-        })
-        .catch((err) => {
-          console.error('Ошибка при удалении карточки:', err);
-        });
-});
-  } else {
-    deleteButton.remove(); // Скрываем кнопку, если карточка не твоя
-  }
+  cardImage.addEventListener('click', () =>
+    handleCardImageClick({ link: cardData.link, name: cardData.name })
+  );
 
   return clonedTemplate;
 };
