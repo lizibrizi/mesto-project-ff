@@ -1,5 +1,3 @@
-import { likeCard, unlikeCard, removeCard } from './api.js';
-
 export const generateCardNode = (
   cardData,
   template,
